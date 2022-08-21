@@ -8,8 +8,10 @@ from telegram.ext import filters, ApplicationBuilder, MessageHandler
 
 import nltk
 from nltk.corpus import wordnet as wn
-from pystardict import Dictionary
 
+from translatepy.translators.google import GoogleTranslate
+
+# token
 try:
     with open('../.tokens/filiasan_bot', 'r') as t_f:
         TOKEN = t_f.read()
@@ -31,20 +33,17 @@ POS_DICT = OrderedDict({
 })
 
 
-dict_en_ru = Dictionary('./dict/korolew/dictd_www.mova.org_korolew_enru')
-dict_ru_en = Dictionary('./dict/korolew/dictd_www.mova.org_korolew_ruen')
-
-
 nest_asyncio.apply()
+
+
+gtranslate = GoogleTranslate()
 
 
 def bot_do(text: str) -> str:
     bot_text = str()
 
-    # En-Ru
-    tran = dict_en_ru.get(text)
-    if tran:
-        bot_text += tran+'\n'
+    # TODO from-to languages
+    bot_text += f"{gtranslate.translate(text, 'Russian')}"
 
     # WordNet
     synsets = wn.synsets(text)
@@ -56,15 +55,10 @@ def bot_do(text: str) -> str:
         for pos in POS_DICT:
             definitions = syn_dict.get(pos)
             if definitions:
-                bot_text += POS_DICT[pos]+'\n'
+                bot_text += f"\n\n{POS_DICT[pos]}\n"
                 for definition in definitions:
                     bot_text += f'\n * {definition}\n'
                 bot_text += '\n'
-
-    # Ru-En
-    tran = dict_ru_en.get(text)
-    if tran:
-        bot_text += tran+'\n'
 
     return bot_text if bot_text else 'Ничего не найдено'
 

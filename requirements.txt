@@ -1,3 +1,4 @@
-nest-asyncio
-python-telegram-bot
-PyStarDict
+nest-asyncio==1.5.5
+python-telegram-bot==20.0a2
+nltk==3.7
+translatepy==2.3

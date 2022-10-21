@@ -1,6 +1,8 @@
 from collections import defaultdict
 from typing import OrderedDict
 
+import argparse
+
 import nest_asyncio
 
 from telegram import Update
@@ -12,9 +14,14 @@ from nltk.corpus import wordnet as wn
 from translatepy.translators.google import GoogleTranslate
 from libretran_help import lt_translate
 
+parser = argparse.ArgumentParser(description='Filia-san telegram bot')
+parser.add_argument('-f', '--token', help='bot token file')
+
+
 # token
 try:
-    with open('../.tokens/filiasan_bot', 'r') as t_f:
+    args = parser.parse_args()
+    with open(args.token, 'r') as t_f:
         TOKEN = t_f.read()
 except Exception as e:
     print('Token file error:', str(e))

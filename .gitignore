@@ -131,4 +131,5 @@ dmypy.json
 # optional
 dict/
 .vscode/
+.idea/
 TODO

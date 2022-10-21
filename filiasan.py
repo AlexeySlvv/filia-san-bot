@@ -11,7 +11,7 @@ from telegram.ext import filters, ApplicationBuilder, MessageHandler
 import nltk
 from nltk.corpus import wordnet as wn
 
-from translatepy.translators.google import GoogleTranslate
+# from translatepy.translators.google import GoogleTranslate
 from libretran_help import lt_translate
 
 parser = argparse.ArgumentParser(description='Filia-san telegram bot')
@@ -32,27 +32,29 @@ nltk.download('wordnet')
 nltk.download('omw-1.4')
 
 
-POS_DICT = OrderedDict({
+POS_DICT = OrderedDict[{
     'n': 'Noun',
     'v': 'Verb',
     'a': 'Adjective',
     's': 'Adjective sattelite',
     'r': 'Adverb',
-})
+}]
 
 
 nest_asyncio.apply()
 
 
-gtranslate = GoogleTranslate()
+# gtranslate = GoogleTranslate()
 
 
 def bot_do(text: str) -> str:
     bot_text = str()
 
     # TODO from-to languages
-    # bot_text += f"{gtranslate.translate(text, 'Russian')}"
     bot_text += f"{lt_translate(text, lang_to='ru')}"
+
+    # TODO message for each translation
+    # bot_text += f"{gtranslate.translate(text, 'Russian')}"
 
     # WordNet
     synsets = wn.synsets(text)

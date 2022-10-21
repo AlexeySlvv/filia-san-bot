@@ -10,6 +10,7 @@ import nltk
 from nltk.corpus import wordnet as wn
 
 from translatepy.translators.google import GoogleTranslate
+from libretran_help import lt_translate
 
 # token
 try:
@@ -43,7 +44,8 @@ def bot_do(text: str) -> str:
     bot_text = str()
 
     # TODO from-to languages
-    bot_text += f"{gtranslate.translate(text, 'Russian')}"
+    # bot_text += f"{gtranslate.translate(text, 'Russian')}"
+    bot_text += f"{lt_translate(text, lang_to='ru')}"
 
     # WordNet
     synsets = wn.synsets(text)
@@ -60,7 +62,7 @@ def bot_do(text: str) -> str:
                     bot_text += f'\n * {definition}\n'
                 bot_text += '\n'
 
-    return bot_text if bot_text else 'Ничего не найдено'
+    return bot_text if bot_text else 'Sorry, nothing was found'
 
 
 async def reply(update: Update, context) -> None:

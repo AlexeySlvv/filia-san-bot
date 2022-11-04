@@ -1,5 +1,3 @@
-nest-asyncio==1.5.5
-python-telegram-bot==20.0a2
-nltk==3.7
+aiogram==2.22.2
+libretranslatepy==2.1.3
 translatepy==2.3
-libretranslatepy==2.1.1

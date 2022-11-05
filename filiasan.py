@@ -26,6 +26,11 @@ async def on_startup(_):
     print('Filia-san is ready to work')
 
 
+@dp.message_handler(commands=['start', 'help'])
+async def do_start_help(msg: types.Message):
+    await msg.answer('Multi-service text translation. Please, send me your text to translate')
+
+
 @dp.message_handler()
 async def do_reply(msg: types.Message):
     # TODO from-to languages

@@ -22,6 +22,10 @@ except Exception as e:
     exit()
 
 
+async def on_startup(_):
+    print('Filia-san is ready to work')
+
+
 @dp.message_handler()
 async def do_reply(msg: types.Message):
     # TODO from-to languages
@@ -34,4 +38,4 @@ async def do_reply(msg: types.Message):
 
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=True, on_startup=on_startup)

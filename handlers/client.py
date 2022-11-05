@@ -15,12 +15,17 @@ async def do_start_help(msg: types.Message):
 # @dp.message_handler()
 async def do_reply(msg: types.Message):
     # TODO from-to languages
+    # TODO service to the end
 
-    lt_text = f"Libre translate:\n{lt_translate(msg.text, lang_to='ru')}"
-    await msg.reply(lt_text)
+    lt_text = lt_translate(msg.text, lang_to='ru')
+    if lt_text:
+        lt_text += '\n\nLibreTranslate libretranslate.com'
+        await msg.reply(lt_text)
 
-    gt_text = f"Google translate:\n{gt_translate(msg.text, lang_to='Russian')}"
-    await msg.reply(gt_text)
+    gt_text = gt_translate(msg.text, lang_to='Russian')
+    if gt_text:
+        gt_text += "\n\nGoogle Translate translate.google.com"
+        await msg.reply(gt_text)
 
 
 def register_client_handlers():

@@ -12,8 +12,8 @@ def _detect_lang(text: str) -> str:
     return langs[0].get("language")
 
 
-def lt_translate(text: str, lang_to: str, lang_from: str = None) -> str:
+def lt_translate(text: str, lang_to: str, lang_from: str = 'auto') -> str:
     global LT_API
-    if not lang_from:
+    if lang_from == 'auto':
         lang_from = _detect_lang(text)
     return LT_API.translate(text, lang_from, lang_to)

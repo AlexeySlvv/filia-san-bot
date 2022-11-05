@@ -1,4 +1,4 @@
-from translatepy.translators.google import GoogleTranslate
+from googletran_help import gt_translate
 from libretran_help import lt_translate
 
 from aiogram import Bot, types
@@ -22,9 +22,6 @@ except Exception as e:
     exit()
 
 
-gtranslate = GoogleTranslate()
-
-
 @dp.message_handler()
 async def do_reply(msg: types.Message):
     # TODO from-to languages
@@ -32,7 +29,7 @@ async def do_reply(msg: types.Message):
     lt_text = f"Libre translate:\n{lt_translate(msg.text, lang_to='ru')}"
     await msg.reply(lt_text)
 
-    gt_text = f"Google translate:\n{gtranslate.translate(msg.text, 'Russian')}"
+    gt_text = f"Google translate:\n{gt_translate(msg.text, lang_to='Russian')}"
     await msg.reply(gt_text)
 
 

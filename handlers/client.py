@@ -20,9 +20,6 @@ async def do_help(msg: types.Message):
 
 # @dp.message_handler()
 async def do_reply(msg: types.Message):
-    # TODO from-to languages
-    # TODO service to the end
-
     lt_text = lt(msg.text, lang_to='ru')
     if lt_text:
         lt_text += '\n\nLibreTranslate libretranslate.com'

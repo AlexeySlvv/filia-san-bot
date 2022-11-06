@@ -1,6 +1,7 @@
 from aiogram import Bot
 from aiogram.dispatcher import Dispatcher
 
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 import argparse
 
@@ -13,7 +14,8 @@ try:
     with open(args.token, 'r') as t_f:
         TOKEN = t_f.read()
         bot = Bot(token=TOKEN)
-        dp = Dispatcher(bot)
+        storage = MemoryStorage()
+        dp = Dispatcher(bot, storage=storage)        
 except Exception as e:
     print('Token file error:', str(e))
     exit()

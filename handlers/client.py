@@ -2,8 +2,8 @@ from aiogram import types
 
 from create_bot import dp
 
-from googletran_help import gt_translate
-from libretran_help import lt_translate
+from translaters.google_tran import translate as gt
+from translaters.libre_tran import translate as lt
 
 from keyboards import kb_client
 
@@ -23,12 +23,12 @@ async def do_reply(msg: types.Message):
     # TODO from-to languages
     # TODO service to the end
 
-    lt_text = lt_translate(msg.text, lang_to='ru')
+    lt_text = lt(msg.text, lang_to='ru')
     if lt_text:
         lt_text += '\n\nLibreTranslate libretranslate.com'
         await msg.reply(lt_text)
 
-    gt_text = gt_translate(msg.text, lang_to='Russian')
+    gt_text = gt(msg.text, lang_to='Russian')
     if gt_text:
         gt_text += "\n\nGoogle Translate translate.google.com"
         await msg.reply(gt_text)

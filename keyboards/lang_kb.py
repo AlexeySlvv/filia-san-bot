@@ -6,3 +6,4 @@ kb_lang = ReplyKeyboardMarkup(resize_keyboard=True)
 
 for lang in LANG_DICT:
     kb_lang.add(KeyboardButton(lang))
+kb_lang.add('Отмена')

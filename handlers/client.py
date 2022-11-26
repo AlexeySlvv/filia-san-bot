@@ -18,23 +18,27 @@ async def do_start(msg: types.Message):
 
 async def do_help(msg: types.Message):
     await msg.answer('''Перевод текста с разных сервисов.
-По умолчанию язык определяется автоматически и переводится на русский.
+По умолчанию переводится с английского на русский.
 Для настройки перевода нажмите или отпарвьте команду "/settings".''')
+
+
+MARKUP_GT = types.InlineKeyboardMarkup()
+MARKUP_GT.add(types.InlineKeyboardButton('Google Translate', 'https://translate.google.com'))
+MARKUP_LT = types.InlineKeyboardMarkup()
+MARKUP_LT.add(types.InlineKeyboardButton('LibreTranslate', 'https://libretranslate.com'))
 
 
 # @dp.message_handler()
 async def do_reply(msg: types.Message):
-    lt_text = lt(
-        msg.text, lang_from=LANG_DICT[settings.lang_from][1], lang_to=LANG_DICT[settings.lang_to][1])
-    if lt_text:
-        lt_text += '\n\nLibreTranslate libretranslate.com'
-        await msg.reply(lt_text)
-
     gt_text = gt(
         msg.text, lang_from=LANG_DICT[settings.lang_from][0], lang_to=LANG_DICT[settings.lang_to][0])
     if gt_text:
-        gt_text += "\n\nGoogle Translate translate.google.com"
-        await msg.reply(gt_text)
+        await msg.reply(gt_text, reply_markup=MARKUP_GT)
+
+    lt_text = lt(
+        msg.text, lang_from=LANG_DICT[settings.lang_from][1], lang_to=LANG_DICT[settings.lang_to][1])
+    if lt_text:
+        await msg.reply(lt_text, reply_markup=MARKUP_LT)
 
 
 def register_client_handlers():

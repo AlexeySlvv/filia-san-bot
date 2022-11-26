@@ -11,7 +11,7 @@ LANG_DICT = {
 
 
 class LangSettings():
-    lang_from = 'auto'
+    lang_from = 'ENG'
     lang_to = 'RUS'
 
 

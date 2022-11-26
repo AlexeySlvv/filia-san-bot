@@ -25,6 +25,16 @@ async def load_settings(msg: types.Message):
     await msg.reply('Язык текста', reply_markup=kb_lang)
 
 
+async def cancel_handler(msg: types.Message, state: FSMContext):
+    try:
+        cur_state = await state.get_state()
+        if cur_state is None:
+            return
+    finally:
+        await state.finish()
+        await msg.reply('Отмена')
+
+
 # @dp.message_handler(state=FSMAdmin.lang_from)
 async def load_from_lang(msg: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -61,23 +71,10 @@ async def do_translate(msg: types.Message, state: FSMContext):
         await state.finish()
 
 
-async def cancel_handlers(msg: types.Message, state: FSMContext):
-    try:
-        cur_state = await state.get_state()
-        if cur_state is None:
-            return
-    finally:
-        await state.finish()
-        await msg.reply('Отмена')
-
-
 def register_client_handlers():
-    dp.register_message_handler(load_settings, commands=[
-                                'settings'], state=None)
+    dp.register_message_handler(load_settings, commands=['settings'], state=None)
+    dp.register_message_handler(cancel_handler, commands=['cancel', 'Отмена'], state='*')
+    dp.register_message_handler(cancel_handler, Text(equals='отмена', ignore_case=True), state='*')
     dp.register_message_handler(load_from_lang, state=FSMAdmin.lang_from)
     dp.register_message_handler(load_to_lang, state=FSMAdmin.lang_to)
     dp.register_message_handler(do_translate, state=FSMAdmin.translate)
-    dp.register_message_handler(cancel_handlers, commands=[
-                                'cancel', 'Отмена'], state='*')
-    dp.register_message_handler(cancel_handlers, Text(
-        equals='отмена', ignore_case=True), state='*')

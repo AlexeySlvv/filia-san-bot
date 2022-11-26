@@ -71,7 +71,7 @@ async def do_translate(msg: types.Message, state: FSMContext):
         await state.finish()
 
 
-def register_client_handlers():
+def register_admin_handlers():
     dp.register_message_handler(load_settings, commands=['settings'], state=None)
     dp.register_message_handler(cancel_handler, commands=['cancel', 'Отмена'], state='*')
     dp.register_message_handler(cancel_handler, Text(equals='отмена', ignore_case=True), state='*')

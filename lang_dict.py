@@ -1,18 +1,18 @@
 LANG_DICT = {
-    'Русский':      ('Russian', 'ru'),
-    'Английский':   ('English', 'en'),
-    'Испанский':    ('Spanish', 'es'),
-    'Китайский':    ('Chinese', 'ch'),
-    'Корейский':    ('Korean', 'ko'),
-    'Немецкий':     ('German', 'de'),
-    'Французский':  ('French', 'fr'),
-    'Японский':     ('Japanese', 'jp'),
+    'RUS': ('Russian', 'ru'),
+    'ENG': ('English', 'en'),
+    'SPA': ('Spanish', 'es'),
+    'CHI': ('Chinese', 'ch'),
+    'KOR': ('Korean', 'ko'),
+    'GER': ('German', 'de'),
+    'FRE': ('French', 'fr'),
+    'JPN': ('Japanese', 'jp'),
 }
 
 
 class LangSettings():
     lang_from = 'auto'
-    lang_to = 'Русский'
+    lang_to = 'RUS'
 
 
 settings = LangSettings()

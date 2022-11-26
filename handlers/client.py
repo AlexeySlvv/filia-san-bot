@@ -5,7 +5,7 @@ from create_bot import dp
 from translaters.google_tran import translate as gt
 from translaters.libre_tran import translate as lt
 
-from keyboards import kb_client
+from keyboards import kb_client, kb_googletran, kb_libretran
 
 from lang_dict import *
 
@@ -19,13 +19,7 @@ async def do_start(msg: types.Message):
 async def do_help(msg: types.Message):
     await msg.answer('''Перевод текста с разных сервисов.
 По умолчанию переводится с английского на русский.
-Для настройки перевода нажмите или отпарвьте команду "/settings".''')
-
-
-MARKUP_GT = types.InlineKeyboardMarkup()
-MARKUP_GT.add(types.InlineKeyboardButton('Google Translate', 'https://translate.google.com'))
-MARKUP_LT = types.InlineKeyboardMarkup()
-MARKUP_LT.add(types.InlineKeyboardButton('LibreTranslate', 'https://libretranslate.com'))
+Для настройки перевода нажмите или отправьте команду /settings''')
 
 
 # @dp.message_handler()
@@ -33,12 +27,12 @@ async def do_reply(msg: types.Message):
     gt_text = gt(
         msg.text, lang_from=LANG_DICT[settings.lang_from][0], lang_to=LANG_DICT[settings.lang_to][0])
     if gt_text:
-        await msg.reply(gt_text, reply_markup=MARKUP_GT)
+        await msg.reply(gt_text, reply_markup=kb_googletran)
 
     lt_text = lt(
         msg.text, lang_from=LANG_DICT[settings.lang_from][1], lang_to=LANG_DICT[settings.lang_to][1])
     if lt_text:
-        await msg.reply(lt_text, reply_markup=MARKUP_LT)
+        await msg.reply(lt_text, reply_markup=kb_libretran)
 
 
 def register_client_handlers():

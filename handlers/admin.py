@@ -7,11 +7,9 @@ from create_bot import dp
 
 from keyboards import kb_lang
 
-from lang_dict import LANG_DICT, settings
+from lang_dict import settings
 
-from translaters.google_tran import translate as gt
-from translaters.libre_tran import translate as lt
-
+from .client import do_reply
 
 class FSMAdmin(StatesGroup):
     lang_from = State()
@@ -56,17 +54,7 @@ async def load_to_lang(msg: types.Message, state: FSMContext):
 
 async def do_translate(msg: types.Message, state: FSMContext):
     try:
-        lt_text = lt(
-            msg.text, lang_from=LANG_DICT[settings.lang_from][1], lang_to=LANG_DICT[settings.lang_to][1])
-        if lt_text:
-            lt_text += '\n\nLibreTranslate libretranslate.com'
-            await msg.reply(lt_text)
-
-        gt_text = gt(
-            msg.text, lang_from=LANG_DICT[settings.lang_from][0], lang_to=LANG_DICT[settings.lang_to][0])
-        if gt_text:
-            gt_text += "\n\nGoogle Translate translate.google.com"
-            await msg.reply(gt_text)
+        await do_reply(msg)
     finally:
         await state.finish()
 

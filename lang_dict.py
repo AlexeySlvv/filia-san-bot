@@ -1,12 +1,12 @@
 LANG_DICT = {
-    'RUS': ('Russian', 'ru'),
-    'ENG': ('English', 'en'),
-    'SPA': ('Spanish', 'es'),
-    'CHI': ('Chinese', 'ch'),
-    'KOR': ('Korean', 'ko'),
-    'GER': ('German', 'de'),
-    'FRE': ('French', 'fr'),
-    'JPN': ('Japanese', 'jp'),
+    'RU': ('Russian', 'ru'),
+    'EN': ('English', 'en'),
+    'ES': ('Spanish', 'es'),
+    'CH': ('Chinese', 'ch'),
+    'KO': ('Korean', 'ko'),
+    'DE': ('German', 'de'),
+    'FR': ('French', 'fr'),
+    'JP': ('Japanese', 'jp'),
 }
 
 
